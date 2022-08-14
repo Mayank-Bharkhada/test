@@ -37,10 +37,10 @@ app.get("/",async (req,res) => {
     try {
         await Student.save();
         await Institute.save();
-        res.json({
+        res.json([{
             id : 1,
             text : "Data is Success fully inserted"
-          });
+          }]);
       } catch (error) {
         res.status(500).send(error);
       }
