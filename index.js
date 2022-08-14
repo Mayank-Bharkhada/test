@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 //const connection = require("./src/connection");
 const StudentModel = require("./src/UserSchema");
 const InstituteModel = require("./src/InstituteSchema");
+const port = process.env.PORT;
 
 const app = express(); // initialize app
 app.use(express.json());
@@ -45,6 +46,6 @@ app.get("/",async (req,res) => {
       }
 });
 
-app.listen(5000,() => {
+app.listen(port,() => {
     console.log("Server is running at 5000 port : ");
 }); 
