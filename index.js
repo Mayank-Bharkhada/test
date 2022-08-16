@@ -47,30 +47,30 @@ app.get("/",async (req,res) => {
 
 app.post("/SignUp",async (req,res) => {
   try {
-    const yourName = req.body.Name;
-    const yourEmail= req.body.Email;
-    const yourPhone = req.body.Phone;
-    const yourDateOfBirth = req.body.DateOfBirth;
-    const saltRounds = 10;
-    const yourPassword = req.body.Password; 
-    console.log(req.body);
-    // const yourName = "Mayank";
-    // const yourEmail= "bdjbdsjvbsk";
-    // const yourPhone = 35237537;
-    // const yourDateOfBirth = new Date();
+    // const yourName = req.body.Name;
+    // const yourEmail= req.body.Email;
+    // const yourPhone = req.body.Phone;
+    // const yourDateOfBirth = req.body.DateOfBirth;
     // const saltRounds = 10;
-    // const yourPassword = "ChmkjJ@11"; 
+    // const yourPassword = req.body.Password; 
+    // console.log(req.body);
+    // // const yourName = "Mayank";
+    // // const yourEmail= "bdjbdsjvbsk";
+    // // const yourPhone = 35237537;
+    // // const yourDateOfBirth = new Date();
+    // // const saltRounds = 10;
+    // // const yourPassword = "ChmkjJ@11"; 
   
-    const salt = await bcrypt.genSalt(saltRounds);
-    const Password = await bcrypt.hash(yourPassword, salt);
-      const Student = new StudentModel ({
-        name: yourName,
-        email: yourEmail,
-        phone: yourPhone,
-        password: yourDateOfBirth,
-        date: Password ,
-      });
-        await Student.save();
+    // const salt = await bcrypt.genSalt(saltRounds);
+    // const Password = await bcrypt.hash(yourPassword, salt);
+    //   const Student = new StudentModel ({
+    //     name: yourName,
+    //     email: yourEmail,
+    //     phone: yourPhone,
+    //     password: yourDateOfBirth,
+    //     date: Password ,
+    //   });
+    //     await Student.save();
   
         res.json([{
             id : 1,
