@@ -5,9 +5,21 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  age: {
+  email: {
+    type: String,
+    required: true,
+  },
+  phone: {
     type: Number,
-    default: 0,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
   },
 });
 

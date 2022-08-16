@@ -1,9 +1,11 @@
 const express = require('express'); // import express
 const mongoose = require("mongoose");
+const bodyparser = require('body-parser');
 // const Router = require("./routes");
 //const connection = require("./src/connection");
 const StudentModel = require("./src/UserSchema");
 const InstituteModel = require("./src/InstituteSchema");
+const bcrypt = require('bcrypt');
 const port = process.env.PORT;
 
 const app = express(); // initialize app
@@ -24,17 +26,31 @@ db.once("open", function () {
 });
 
 app.get("/",async (req,res) => {
-    const Student = new StudentModel ({
-        name: "Mayank",
-        age: 21
-    });
+  res.json([{
+    id : 1,
+    text : "Welcome to home page!!!"
+  }]);
+});
 
-    const Institute = new InstituteModel ({
-        name: "Sigma",
-        year: 10
-    });
 
-    try {
+
+app.post("/SignUp",async (req,res) => {
+  try {
+    const yourName = req.body.Name;
+    const yourEmail= req.body.Name;
+    const yourPhone = req.body.Phone;
+    const yourDateOfBirth = req.body.DateOfBirth;
+    const saltRounds = 10;
+    const yourPassword = req.body.Password; 
+    const salt = await bcrypt.genSalt(saltRounds);
+    const Password = await bcrypt.hash(yourPassword, salt);
+      const Student = new StudentModel ({
+        name: yourName,
+        email: yourEmail,
+        phone: yourPhone,
+        password: yourDateOfBirth,
+        date: Password ,
+      });
         await Student.save();
         await Institute.save();
         res.json([{
