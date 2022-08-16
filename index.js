@@ -1,6 +1,6 @@
 const express = require('express'); // import express
 const mongoose = require("mongoose");
-const bodyparser = require('body-parser');
+const bodyParser = require('body-parser');
 // const Router = require("./routes");
 //const connection = require("./src/connection");
 const StudentModel = require("./src/UserSchema");
@@ -10,6 +10,17 @@ const port = process.env.PORT;
 
 const app = express(); // initialize app
 app.use(express.json());
+
+app.use(bodyParser.urlencoded({
+  extended: true,
+  limit: '50mb',
+  parameterLimit: 100000
+}))
+app.use(bodyParser.json({
+  limit: '50mb',
+  parameterLimit: 100000
+}))
+
 
 mongoose.connect(
     'mongodb+srv://Studydoor:ChmkjJ_11@cluster0.iygive1.mongodb.net/User?retryWrites=true&w=majority', 
