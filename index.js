@@ -6,10 +6,24 @@ const bodyParser = require('body-parser');
 const StudentModel = require("./src/UserSchema");
 const InstituteModel = require("./src/InstituteSchema");
 const bcrypt = require('bcrypt');
+const cors = require("cors");
 const port = process.env.PORT;
 
 const app = express(); // initialize app
-app.use(express.json());
+app.use(express.json({
+  type: ['application/json', 'text/plain']
+}))
+app.use(cors());
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*")
+// }) 
+
+app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Add other headers here
+  res.setHeader('Access-Control-Allow-Methods', 'POST'); // Add other methods here
+  res.send();
+});
 
 app.use(bodyParser.urlencoded({
   extended: true,
@@ -47,13 +61,13 @@ app.get("/",async (req,res) => {
 
 app.post("/SignUp",async (req,res) => {
   try {
+    console.log(req.body);
     const yourName = req.body.Name;
     const yourEmail= req.body.Email;
     const yourPhone = req.body.Phone;
     const yourDateOfBirth = req.body.DateOfBirth;
     const saltRounds = 10;
     const yourPassword = req.body.Password; 
-    console.log(req.body);
     
     const salt = await bcrypt.genSalt(saltRounds);
     const Password = await bcrypt.hash(yourPassword, salt);
@@ -67,9 +81,10 @@ app.post("/SignUp",async (req,res) => {
         await Student.save();
   
         res.json([{
-            id : 1,
-            text : "Data is Success fully inserted"
-          }]);
+          id : 1,
+          text : "Data is Success fully inserted"
+        }]);
+        
       } catch (error) {
         console.log(error);
         res.status(500).send(error);
